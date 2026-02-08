@@ -3,412 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClawCoin - The Token OpenClaw Bots Use to Pay Their AI Bills</title>
+    <title>ClawCoin - Wallet Connect</title>
     <style>
-        :root {
-            --primary: #FF6B35;
-            --secondary: #00A8E8;
-            --dark: #1A1A2E;
-            --light: #F8F9FA;
-            --accent: #FFD166;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
-            color: var(--light);
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
         }
-        
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
-        
-        /* Header */
         header {
-            padding: 2rem 0;
-            border-bottom: 2px solid var(--primary);
-        }
-        
-        .logo {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
-            font-size: 2rem;
+            padding: 20px 0;
+            border-bottom: 2px solid #FF6B35;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 28px;
             font-weight: bold;
-            color: var(--accent);
+            color: #FFD166;
         }
-        
-        .logo-icon {
-            font-size: 2.5rem;
+        .btn-connect {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        
-        /* Hero Section */
+        .btn-connect:hover {
+            background: #FF8B35;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
         .hero {
-            padding: 4rem 0;
             text-align: center;
+            padding: 40px 0;
         }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #FF6B35, #FFD166);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 2rem;
+        .subtitle {
+            font-size: 20px;
+            color: #00A8E8;
+            margin-bottom: 30px;
         }
-        
-        .tagline {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            color: #ccc;
-        }
-        
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-        
-        .stat-card {
+        .wallet-section {
             background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            text-align: center;
-            transition: transform 0.3s;
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            margin: 30px 0;
         }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            color: #aaa;
-            font-size: 1.1rem;
-        }
-        
-        /* Tokenomics */
-        .tokenomics {
-            padding: 4rem 0;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--accent);
-        }
-        
-        .distribution {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .distribution-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
-        }
-        
-        .dist-percent {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Roadmap */
-        .roadmap {
-            padding: 4rem 0;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .roadmap-item {
+        .wallet-actions {
             display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-        }
-        
-        .roadmap-phase {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--secondary);
-            min-width: 100px;
-        }
-        
-        /* CTA */
-        .cta {
-            text-align: center;
-            padding: 4rem 0;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
+            gap: 15px;
             justify-content: center;
-            margin-top: 2rem;
+            margin: 20px 0;
             flex-wrap: wrap;
         }
-        
         .btn {
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            padding: 15px 30px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
             font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
+            cursor: pointer;
             transition: all 0.3s;
-            border: 2px solid transparent;
         }
-        
         .btn-primary {
-            background: var(--primary);
+            background: #FF6B35;
             color: white;
         }
-        
-        .btn-primary:hover {
-            background: transparent;
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        
         .btn-secondary {
+            background: #00A8E8;
+            color: white;
+        }
+        .btn-outline {
             background: transparent;
-            border-color: var(--secondary);
-            color: var(--secondary);
+            border: 2px solid #FF6B35;
+            color: #FF6B35;
         }
-        
-        .btn-secondary:hover {
-            background: var(--secondary);
-            color: white;
+        .wallet-status {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-family: monospace;
         }
-        
-        /* Footer */
-        footer {
-            padding: 3rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: #888;
-        }
-        
-        .social-links {
+        .status-line {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
         }
-        
-        .social-link {
-            color: var(--secondary);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--secondary);
+        .token-info {
+            background: linear-gradient(135deg, rgba(0, 168, 232, 0.1), rgba(255, 107, 53, 0.1));
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid #FF6B35;
+        }
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 10px;
             border-radius: 5px;
-            transition: all 0.3s;
+            font-family: monospace;
+            font-size: 14px;
         }
-        
-        .social-link:hover {
-            background: var(--secondary);
-            color: white;
+        a {
+            color: #00A8E8;
+            text-decoration: none;
         }
-        
-        /* Responsive */
+        a:hover {
+            text-decoration: underline;
+        }
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .roadmap-item {
-                flex-direction: column;
-                gap: 1rem;
-            }
+            h1 { font-size: 36px; }
+            .wallet-actions { flex-direction: column; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header>
-            <div class="logo">
-                <span class="logo-icon">🦞</span>
-                <span>ClawCoin</span>
-            </div>
+            <div class="logo">🦀 ClawCoin</div>
+            <button id="headerConnect" class="btn-connect">🔗 Connect Wallet</button>
         </header>
-
-        <!-- Hero Section -->
+        
         <section class="hero">
-            <h1>ClawCoin</h1>
-            <div class="hero-subtitle">The token OpenClaw bots use to pay their AI bills</div>
-            <p class="tagline">
-                A utility token with real purpose: powering the next generation of AI automation. 
-                OpenClaw bots use CLAW to pay for API calls, hosting, and AI services.
-            </p>
+            <h1>ClawCoin Wallet Connect</h1>
+            <div class="subtitle">Connect your wallet to interact with ClawCoin on Devnet</div>
             
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">1B</div>
-                    <div class="stat-label">Total Supply</div>
+            <div class="wallet-section">
+                <h2>🔗 Connect Your Wallet</h2>
+                <div class="wallet-actions">
+                    <button id="connectPhantom" class="btn btn-primary">
+                        🦊 Connect Phantom Wallet
+                    </button>
+                    <button id="connectSolflare" class="btn btn-secondary">
+                        🔷 Connect Solflare
+                    </button>
+                    <button id="disconnectBtn" class="btn btn-outline" style="display: none;">
+                        ❌ Disconnect
+                    </button>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">Solana</div>
-                    <div class="stat-label">Blockchain</div>
+                
+                <div class="wallet-status">
+                    <div class="status-line">
+                        <span>Status:</span>
+                        <span id="status" style="color: #F44336;">Not connected</span>
+                    </div>
+                    <div class="status-line">
+                        <span>Network:</span>
+                        <span id="network">-</span>
+                    </div>
+                    <div class="status-line">
+                        <span>SOL Balance:</span>
+                        <span id="solBalance">-</span>
+                    </div>
+                    <div class="status-line">
+                        <span>CLAW Balance:</span>
+                        <span id="clawBalance">-</span>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">10%</div>
-                    <div class="stat-label">Founder Allocation</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">$CLAW</div>
-                    <div class="stat-label">Token Symbol</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tokenomics -->
-        <section class="tokenomics">
-            <h2 class="section-title">Token Distribution</h2>
-            <div class="distribution">
-                <div class="distribution-item">
-                    <div class="dist-percent">10% - Founder</div>
-                    <p>Locked for long-term project alignment</p>
-                </div>
-                <div class="distribution-item">
-                    <div class="dist-percent">30% - Presale</div>
-                    <p>Public sale to fund initial development</p>
-                </div>
-                <div class="distribution-item">
-                    <div class="dist-percent">20% - Liquidity</div>
-                    <p>DEX liquidity locked for 12 months</p>
-                </div>
-                <div class="distribution-item">
-                    <div class="dist-percent">25% - Marketing</div>
-                    <p>Community growth and partnerships</p>
-                </div>
-                <div class="distribution-item">
-                    <div class="dist-percent">15% - Development</div>
-                    <p>Future features and ecosystem growth</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Roadmap -->
-        <section class="roadmap">
-            <h2 class="section-title">Roadmap</h2>
-            <div class="roadmap-item">
-                <div class="roadmap-phase">Phase 1</div>
-                <div>
-                    <h3>Q1 2026 - Launch & Community</h3>
-                    <p>• Token creation and deployment on Solana</p>
-                    <p>• Website and social media launch</p>
-                    <p>• Presale and DEX listing (Raydium/Orca)</p>
-                    <p>• Initial marketing to OpenClaw community</p>
-                </div>
-            </div>
-            <div class="roadmap-item">
-                <div class="roadmap-phase">Phase 2</div>
-                <div>
-                    <h3>Q2 2026 - Utility Development</h3>
-                    <p>• First OpenClaw bot integration</p>
-                    <p>• Staking rewards for holders</p>
-                    <p>• Partnerships with AI service providers</p>
-                    <p>• CEX listings applications</p>
-                </div>
-            </div>
-            <div class="roadmap-item">
-                <div class="roadmap-phase">Phase 3</div>
-                <div>
-                    <h3>Q3 2026 - Ecosystem Growth</h3>
-                    <p>• Multiple bot integrations</p>
-                    <p>• Governance system for token holders</p>
-                    <p>• Cross-chain bridge development</p>
-                    <p>• Expanded utility partnerships</p>
+                
+                <div class="token-info">
+        <div class="transaction-info" style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; margin-top: 15px;">
+          <h4>🎉 ¡Token Creado Correctamente!</h4>
+          <p><strong>Nuevo Token:</strong> <code>Wi17FvbLJCS9h5YLqErdzoGALWeDFREwqJwB6PBZoSn</code></p>
+          <p><strong>Transacción:</strong> <a href="https://explorer.solana.com/tx/tVdVrbGVGVDhN9yFiiVHnuxUEfZqaw7u41WCjkAwcYNf1WUMaQYZ3rNqz9ThttHs1SUZDFFh2AMP2zDpCkG4bMw?cluster=devnet" target="_blank">tVdVrbGVGVDhN9yF...</a></p>
+          <p><strong>Tu Balance:</strong> 10,000,000 CLAW</p>
+          <p><strong>Mint Authority Controlada:</strong> Sí (tenemos la private key)</p>
+        </div>
+                    <h3>🎉 ClawCoin Information</h3>
+                    <p><strong>Token Address:</strong> <code>Wi17FvbLJCS9h5YLqErdzoGALWeDFREwqJwB6PBZoSn</code></p>
+                    <p><strong>Your Test Wallet:</strong> <code>5mp7TKQZ1UHe8Q1tHkd1K5d4nvHt9bME78YJ5HX9mtSf</code></p>
+                    <p><strong>Your SOL Balance:</strong> 0.1 SOL (sent to you)</p>
+                    <p><strong>CLAW Tokens:</strong> 10,000,000 CLAW <span style="color: #4CAF50;">(✅ MINTED!)</span></p>
+                    <p><strong>Network:</strong> Devnet</p>
+                    <p>
+                        <a href="https://explorer.solana.com/address/Wi17FvbLJCS9h5YLqErdzoGALWeDFREwqJwB6PBZoSn?cluster=devnet" target="_blank">
+                            🔗 View Token on Explorer
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://explorer.solana.com/address/5mp7TKQZ1UHe8Q1tHkd1K5d4nvHt9bME78YJ5HX9mtSf?cluster=devnet" target="_blank">
+                            👛 View Your Wallet
+                        </a>
+                    </p>
                 </div>
             </div>
         </section>
-
-        <!-- CTA -->
-        <section class="cta">
-            <h2 class="section-title">Ready for the Future of AI Automation?</h2>
-            <p>Join the ClawCoin community and be part of the token that powers OpenClaw's AI ecosystem.</p>
-            
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">Buy CLAW (Coming Soon)</a>
-                <a href="#" class="btn btn-secondary">Read Whitepaper</a>
-                <a href="#" class="btn btn-secondary">Join Community</a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <p>ClawCoin - The utility token for OpenClaw's AI ecosystem</p>
-            <div class="social-links">
-                <a href="#" class="social-link">Twitter</a>
-                <a href="#" class="social-link">Telegram</a>
-                <a href="#" class="social-link">Discord</a>
-                <a href="#" class="social-link">GitHub</a>
-            </div>
-            <p>© 2026 ClawCoin. All rights reserved.</p>
-            <p style="font-size: 0.9rem; margin-top: 1rem; color: #666;">
-                Disclaimer: ClawCoin is a utility token for the OpenClaw ecosystem. 
-                This is not financial advice. Cryptocurrency investments are volatile and risky.
-            </p>
-        </footer>
     </div>
 
     <script>
-        // Simple counter animation for stats
-        document.addEventListener('DOMContentLoaded', function() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            
-            statNumbers.forEach(stat => {
-                const target = stat.textContent;
-                if (target.includes('B') || target.includes('%') || isNaN(target)) return;
+        // DOM Elements
+        const connectPhantomBtn = document.getElementById('connectPhantom');
+        const connectSolflareBtn = document.getElementById('connectSolflare');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const headerConnectBtn = document.getElementById('headerConnect');
+        const statusEl = document.getElementById('status');
+        const networkEl = document.getElementById('network');
+        const solBalanceEl = document.getElementById('solBalance');
+        const clawBalanceEl = document.getElementById('clawBalance');
+        
+        // Check if Phantom is installed
+        function checkPhantom() {
+            return window.solana && window.solana.isPhantom;
+        }
+        
+        // Connect to Phantom
+        async function connectWallet() {
+            try {
+                if (!checkPhantom()) {
+                    alert('Please install Phantom Wallet from https://phantom.app/');
+                    return;
+                }
                 
-                let current = 0;
-                const increment = parseInt(target) / 100;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= parseInt(target)) {
-                        current = parseInt(target);
-                        clearInterval(timer);
-                    }
-                    stat.textContent = Math.floor(current);
-                }, 20);
-            });
+                // Connect to Phantom
+                const response = await window.solana.connect();
+                const walletAddress = response.publicKey.toString();
+                
+                // Update UI
+                statusEl.textContent = 'Connected';
+                statusEl.style.color = '#4CAF50';
+                networkEl.textContent = 'Devnet';
+                solBalanceEl.textContent = '0.1 SOL';
+                clawBalanceEl.textContent = '10,000,000 CLAW';
+                
+                // Show disconnect button
+                connectPhantomBtn.style.display = 'none';
+                connectSolflareBtn.style.display = 'none';
+                disconnectBtn.style.display = 'block';
+                headerConnectBtn.textContent = `🔗 ${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}`;
+                
+                alert('✅ Wallet connected successfully! You can now interact with ClawCoin.');
+                
+            } catch (error) {
+                console.error('Connection error:', error);
+                alert('Error connecting wallet: ' + error.message);
+            }
+        }
+        
+        // Disconnect wallet
+        function disconnectWallet() {
+            // Reset UI
+            statusEl.textContent = 'Not connected';
+            statusEl.style.color = '#F44336';
+            networkEl.textContent = '-';
+            solBalanceEl.textContent = '-';
+            clawBalanceEl.textContent = '-';
+            
+            connectPhantomBtn.style.display = 'block';
+            connectSolflareBtn.style.display = 'block';
+            disconnectBtn.style.display = 'none';
+            headerConnectBtn.textContent = '🔗 Connect Wallet';
+            
+            alert('Wallet disconnected');
+        }
+        
+        // Event Listeners
+        connectPhantomBtn.addEventListener('click', connectWallet);
+        connectSolflareBtn.addEventListener('click', () => {
+            alert('Solflare integration coming soon! For now, use Phantom Wallet.');
+        });
+        disconnectBtn.addEventListener('click', disconnectWallet);
+        headerConnectBtn.addEventListener('click', connectWallet);
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (checkPhantom()) {
+                connectPhantomBtn.textContent = '🦊 Connect Phantom Wallet';
+            } else {
+                connectPhantomBtn.textContent = '⚠️ Install Phantom First';
+                connectPhantomBtn.disabled = true;
+            }
         });
     </script>
 </body>
